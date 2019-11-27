@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useForm} from "./useForm"
 
 import './App.css';
@@ -10,7 +10,7 @@ import './App.css';
 // }
 const App = () => {
   
-  const [{count, count2}, setCount] = useState({count: 10, count2: 20});
+  // const [{count, count2}, setCount] = useState({count: 10, count2: 20});
 
 
   //this is the default way of doing it with local state and no custom hoook logic
@@ -20,12 +20,20 @@ const App = () => {
 
   //this uses the custom hook to manage the change
   const [values, handleChange] = useForm({email: "", password: ""})
+
+  /// use effect executes a function after every render.  this console logs after
+  // every render.  takes a second argument in the example below it only fires on a change to the password.  This is called
+  // a dependency array 
+useEffect(() => {
+  console.log("render")
+}, [values.password])
+
   
 return (
-  <>
-  <button onClick={() => setCount(currentState => ({
+  <div>
+  {/* <button onClick={() => setCount(currentState => ({
     count2: currentState.count2 + 1, 
-    count: currentState.count + 1}))}>+</button>
+    count: currentState.count + 1}))}>+</button> */}
     {/* To have multiple updates, spread the object then do the updates to the 
     portion of the object you want to change.  the updated function doesn't do a 
     merge.  basically you need to use all the keys in the update to ensure
@@ -40,12 +48,12 @@ return (
     
     <input name="email" value={values.email} onChange={handleChange}></input>
     <input type="password" value={values.password} name="password" onChange={handleChange}></input>
-
+{/* 
     <div>Count 1: {count}</div>
-    <div>Count 2: {count2}</div>
+    <div>Count 2: {count2}</div> */}
 
 
-</>
+</div>
 ) 
   
 
