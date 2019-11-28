@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useForm} from "./useForm"
-
+import {useFetch} from './useFetch'
 import './App.css';
 
 // const expensiveInitialState = () => {
@@ -29,19 +29,24 @@ const App = () => {
 //   console.log("render")
 // }, [])
 
-useEffect(() =>{
-  const onMouseMove = e => {
-    console.log(e)
-  }
+// useEffect(() =>{
+//   const onMouseMove = e => {
+//     console.log(e)
+//   }
 
-  window.addEventListener("mousemove", onMouseMove)
-  return () => {
-    window.removeEventListener("mousemove", onMouseMove)
-  }
-}, [])
+//   window.addEventListener("mousemove", onMouseMove)
+//   return () => {
+//     window.removeEventListener("mousemove", onMouseMove)
+//   }
+// }, [])
+  const [count, setCount] = useState(0)
+  const {data,loading} = useFetch(`http://numbersapi.com/${count}/trivia`)
+//
   
 return (
   <div>
+    <div>{!data ? 'Loading' : data}</div>
+    <button onClick={() => setCount(c => c + 1)}>New Fact</button>
   {/* <button onClick={() => setCount(currentState => ({
     count2: currentState.count2 + 1, 
     count: currentState.count + 1}))}>+</button> */}
