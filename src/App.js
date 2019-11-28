@@ -24,10 +24,21 @@ const App = () => {
   /// use effect executes a function after every render.  this console logs after
   // every render.  takes a second argument in the example below it only fires on a change to the password.  This is called
   // a dependency array 
-useEffect(() => {
-  console.log("render")
-}, [values.password])
+  // if the array is empty, it will only execute on the mount
+// useEffect(() => {
+//   console.log("render")
+// }, [])
 
+useEffect(() =>{
+  const onMouseMove = e => {
+    console.log(e)
+  }
+
+  window.addEventListener("mousemove", onMouseMove)
+  return () => {
+    window.removeEventListener("mousemove", onMouseMove)
+  }
+}, [])
   
 return (
   <div>
