@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useForm} from "./useForm"
 import {useFetch} from './useFetch'
 import './App.css';
@@ -40,7 +40,10 @@ const App = () => {
 //   }
 // }, [])
   const [count, setCount] = useState(JSON.parse(localStorage.getItem('count')))
-  const {data,loading} = useFetch(`http://numbersapi.com/${count}/trivia`)
+  const {data} = useFetch(`http://numbersapi.com/${count}/trivia`)
+  
+  const inputRef = useRef()
+  
 
   useEffect(() => {
     localStorage.setItem('count', JSON.stringify(count))
@@ -50,6 +53,7 @@ const App = () => {
 return (
   <div>
     <div>{!data ? 'Loading' : data}</div>
+    <button onClick={()=> setCount(c => c - 1)}>Previous Fact</button>
     <button onClick={() => setCount(c => c + 1)}>New Fact</button>
     <div>Count: {count}</div>
   {/* <button onClick={() => setCount(currentState => ({
@@ -67,13 +71,15 @@ return (
     this uses the useForm custom hook to define the logic to update the object
     the handle change is the updated function for updating the form object */}
     
-    <input name="email" value={values.email} onChange={handleChange}></input>
+    <input ref={inputRef} name="email" value={values.email} onChange={handleChange}></input>
     <input type="password" value={values.password} name="password" onChange={handleChange}></input>
 {/* 
     <div>Count 1: {count}</div>
     <div>Count 2: {count2}</div> */}
 
-
+    <button onClick={() => {
+      inputRef.current.focus() //gets the current value of the reference focuses on the dom node that the reference points to
+    }}>Focus</button>
 </div>
 ) 
   
