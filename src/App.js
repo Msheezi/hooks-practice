@@ -39,14 +39,19 @@ const App = () => {
 //     window.removeEventListener("mousemove", onMouseMove)
 //   }
 // }, [])
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(JSON.parse(localStorage.getItem('count')))
   const {data,loading} = useFetch(`http://numbersapi.com/${count}/trivia`)
+
+  useEffect(() => {
+    localStorage.setItem('count', JSON.stringify(count))
+  },[count])
 //
   
 return (
   <div>
     <div>{!data ? 'Loading' : data}</div>
     <button onClick={() => setCount(c => c + 1)}>New Fact</button>
+    <div>Count: {count}</div>
   {/* <button onClick={() => setCount(currentState => ({
     count2: currentState.count2 + 1, 
     count: currentState.count + 1}))}>+</button> */}

@@ -12,7 +12,7 @@ export const useFetch = (url) => {
             setState({data: y, loading: false})
             //after the data is fetched and the promised fulfilled, set the state to the values, loading is false and return the state object
         })
-    }, [url])
+    }, [url, setState])
 
     return state
 }
