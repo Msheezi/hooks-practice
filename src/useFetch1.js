@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 
 export const useFetch1 = (url) => {
-    const [state,setState] = useState({ curr_temp: null, low: null, hi: null, city: null, loading: true})
+    const [state,setState] = useState({ current: null, low: null, hi: null, city: null, loading: true})
         useEffect(()=>{
             // setState(state => ({ temp: state.temp, temp_min: state.temp_min, temp_max: state.temp_max, loading: true}) )
 
@@ -10,7 +10,7 @@ export const useFetch1 = (url) => {
                 .then(x => x.json())
                 .then(y => {
                     console.log("weather info:" ,y)
-                    setState({ curr_temp: y.main.temp, low: y.main.temp_min, hi: y.main.temp_max, city: y.name,  loading: false})
+                    setState({ current: y.main.temp, low: y.main.temp_min, hi: y.main.temp_max, city: y.name,  loading: false})
                 
                 })
         }, [url, setState])

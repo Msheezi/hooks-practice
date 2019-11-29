@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import {useForm} from "./useForm"
 import {useFetch} from './useFetch'
 import { useFetch1 } from './useFetch1'
+import {weatherKey} from './apikeys'
 import './App.css';
 
 // const expensiveInitialState = () => {
@@ -52,7 +53,7 @@ const App = () => {
 
   
 
-  const  weather  = useFetch1("https://api.openweathermap.org/data/2.5/weather?zip=95136,us&appid=60bc9a67ab6d578ff5143a85ebaaf596")
+  const  weather  = useFetch1(`https://api.openweathermap.org/data/2.5/weather?zip=95136,us&appid=${weatherKey}`)
 
 
   
