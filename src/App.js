@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {useForm} from "./useForm"
 import {useFetch} from './useFetch'
+import { useFetch1 } from './useFetch1'
 import './App.css';
 
 // const expensiveInitialState = () => {
@@ -39,23 +40,47 @@ const App = () => {
 //     window.removeEventListener("mousemove", onMouseMove)
 //   }
 // }, [])
-  const [count, setCount] = useState(JSON.parse(localStorage.getItem('count')))
+  const [count, setCount] = useState(0)
   const {data} = useFetch(`http://numbersapi.com/${count}/trivia`)
   
   const inputRef = useRef()
-  
+  // const [location, setLocation] = useState()
 
   useEffect(() => {
     localStorage.setItem('count', JSON.stringify(count))
   },[count])
-//
+
   
+
+  const  weather  = useFetch1("https://api.openweathermap.org/data/2.5/weather?zip=95136,us&appid=60bc9a67ab6d578ff5143a85ebaaf596")
+
+
+  
+  let test = Object.keys(weather).map(key => [key, weather[key]])
+  
+
+  let grid = test.map((ele, i) => {
+    if (typeof ele[1] == 'number'){
+      ele[1] = Math.floor((((ele[1] - 273.15) * 1.8) + 32))
+      return (<li key={i}>{ele[0]}: {ele[1]}</li>)
+    }  
+  
+  } )
+
+
+
+
 return (
   <div>
     <div>{!data ? 'Loading' : data}</div>
     <button onClick={()=> setCount(c => c - 1)}>Previous Fact</button>
     <button onClick={() => setCount(c => c + 1)}>New Fact</button>
-    <div>Count: {count}</div>
+    {/* <div>Count: {count}</div> */}
+    <div>Weather for: {weather.city}</div>
+    <ul>{grid}</ul>
+    {/* <div>{weather.temp_max, weather.temp_min, weather.temp }</div> */}
+    
+
   {/* <button onClick={() => setCount(currentState => ({
     count2: currentState.count2 + 1, 
     count: currentState.count + 1}))}>+</button> */}

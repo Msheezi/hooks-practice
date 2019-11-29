@@ -2,6 +2,7 @@
 import {useEffect, useState} from 'react'
 
 export const useFetch = (url) => {
+    
     const [state, setState] = useState({data: null, loading: true})// initial values for the state object
     //initially sets the state object to empty, and shows that it is loading the data
     useEffect(() => {
