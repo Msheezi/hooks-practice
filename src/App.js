@@ -51,9 +51,8 @@ const App = () => {
     localStorage.setItem('count', JSON.stringify(count))
   },[count])
 
-  
 
-  const  weather  = useFetch1(`https://api.openweathermap.org/data/2.5/weather?zip=95136,us&appid=${weatherKey}`)
+  const weather = useFetch1(`https://api.openweathermap.org/data/2.5/weather?zip=95136,us&appid=${weatherKey}`)
 
 
   
@@ -63,9 +62,9 @@ const App = () => {
   let grid = test.map((ele, i) => {
     if (typeof ele[1] == 'number'){
       ele[1] = Math.floor((((ele[1] - 273.15) * 1.8) + 32))
-      return (<li key={i}>{ele[0]}: {ele[1]}</li>)
+      return ( <li key={i}>{ele[0]}: {ele[1]}</li>) 
     }  
-  
+      
   } )
 
 
@@ -79,6 +78,7 @@ return (
     {/* <div>Count: {count}</div> */}
     <div>Weather for: {weather.city}</div>
     <ul>{grid}</ul>
+    <button onClick={()=> weather.loading = true}>Refresh Weather</button>
     {/* <div>{weather.temp_max, weather.temp_min, weather.temp }</div> */}
     
 

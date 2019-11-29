@@ -11,7 +11,7 @@ export const useFetch1 = (url) => {
                 
                 })
         }, [url, setState])
-        
+        console.log("I ran again")
 return state
 }
 
