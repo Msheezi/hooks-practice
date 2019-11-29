@@ -2,17 +2,18 @@ import { useEffect, useState } from 'react'
 
 
 export const useFetch1 = (url) => {
-    const [state,setState] = useState({ current: null, low: null, hi: null, city: null, loading: true})
+    const [weather,setWeather] = useState({ current: null, low: null, hi: null, city: null, loading: true})
+    
         useEffect(()=>{
             fetch(url)
                 .then(x => x.json())
                 .then(y => {
-                    setState({ current: y.main.temp, low: y.main.temp_min, hi: y.main.temp_max, city: y.name,  loading: false})
+                    setWeather({ current: y.main.temp, low: y.main.temp_min, hi: y.main.temp_max, city: y.name,  loading: false})
                 
                 })
-        }, [url, setState])
+        }, [url, setWeather])
         console.log("I ran again")
-return state
+return weather
 }
 
 // ((-273.15)*1.8)+32

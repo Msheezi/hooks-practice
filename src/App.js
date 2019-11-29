@@ -78,7 +78,7 @@ return (
     {/* <div>Count: {count}</div> */}
     <div>Weather for: {weather.city}</div>
     <ul>{grid}</ul>
-    <button onClick={()=> weather.loading = true}>Refresh Weather</button>
+    <button onClick={()=> weather.loading = !weather.loading}>Refresh Weather</button>
     {/* <div>{weather.temp_max, weather.temp_min, weather.temp }</div> */}
     
 
