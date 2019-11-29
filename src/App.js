@@ -73,7 +73,7 @@ const App = () => {
 
 return (
   <div>
-    <div>{!data ? 'Loading' : data}</div>
+    <div>Random Fact: {!data ? 'Loading' : data}</div>
     <button onClick={()=> setCount(c => c - 1)}>Previous Fact</button>
     <button onClick={() => setCount(c => c + 1)}>New Fact</button>
     {/* <div>Count: {count}</div> */}
